@@ -2,51 +2,703 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Cek Nomor WhatsApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Fezzlycraft Store</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      text-align: center;
-      padding-top: 50px;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
     }
-    .card {
-      background: white;
-      width: 300px;
-      margin: auto;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+    body{
+      background:linear-gradient(
+        180deg,
+        #fff8d6 0%,
+        #ffe77a 100%
+      );
+      min-height:100vh;
+      padding:24px;
+      color:#111827;
     }
-    img {
-      width: 120px;
-      border-radius: 50%;
+
+    .container{
+      width:100%;
+      max-width:1100px;
+      margin:auto;
     }
-    button {
-      background: #25D366;
-      border: none;
-      color: white;
-      padding: 10px 15px;
-      margin-top: 15px;
-      border-radius: 5px;
-      cursor: pointer;
+
+    /* HEADER */
+
+    .header{
+      background:#ffffff;
+      border-radius:30px;
+      padding:28px;
+      text-align:center;
+      box-shadow:0 10px 28px rgba(0,0,0,0.08);
+      margin-bottom:28px;
     }
+
+    .logo{
+      width:120px;
+      height:120px;
+      border-radius:28px;
+      object-fit:cover;
+      border:5px solid #facc15;
+      box-shadow:0 0 25px rgba(250,204,21,0.35);
+      margin-bottom:18px;
+    }
+
+    .title{
+      font-size:42px;
+      font-weight:800;
+    }
+
+    .yellow{
+      color:#eab308;
+      text-shadow:0 2px 10px rgba(234,179,8,0.3);
+    }
+
+    .white{
+      color:#ffffff;
+      text-shadow:0 2px 8px rgba(0,0,0,0.45);
+    }
+
+    .desc{
+      margin-top:12px;
+      color:#374151;
+      font-size:15px;
+      font-weight:700;
+      line-height:1.6;
+    }
+
+    /* RANKS */
+
+    .ranks{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:22px;
+    }
+
+    .rank-card{
+      background:#ffffff;
+      border-radius:28px;
+      padding:24px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      transition:0.25s;
+      text-align:center;
+    }
+
+    .rank-card:hover{
+      transform:translateY(-5px);
+    }
+
+    .rank-name{
+      font-size:30px;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .elite{
+      color:#22c55e;
+    }
+
+    .epic{
+      color:#3b82f6;
+    }
+
+    .legend{
+      color:#d946ef;
+    }
+
+    .mythical{
+      color:#ef4444;
+    }
+
+    .price{
+      font-size:34px;
+      font-weight:800;
+      color:#111827;
+      margin-bottom:18px;
+    }
+
+    .features{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:22px;
+      text-align:left;
+    }
+
+    .feature{
+      background:#fff8dc;
+      border:2px solid rgba(250,204,21,0.16);
+      padding:12px;
+      border-radius:16px;
+      font-size:14px;
+      font-weight:700;
+      line-height:1.5;
+    }
+
+    .buy-btn{
+      width:100%;
+      border:none;
+      cursor:pointer;
+      background:linear-gradient(
+        135deg,
+        #fde047,
+        #facc15
+      );
+      color:#111827;
+      padding:16px;
+      border-radius:20px;
+      font-size:15px;
+      font-weight:800;
+      transition:0.25s;
+      box-shadow:0 6px 18px rgba(250,204,21,0.28);
+    }
+
+    .buy-btn:hover{
+      transform:translateY(-3px) scale(1.02);
+    }
+
+    /* POPUP */
+
+    .popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:9999;
+    }
+
+    .popup-box{
+      width:100%;
+      max-width:420px;
+      background:#ffffff;
+      border-radius:28px;
+      padding:28px;
+      position:relative;
+      animation:popup 0.2s ease;
+    }
+
+    @keyframes popup{
+      from{
+        transform:scale(0.9);
+        opacity:0;
+      }
+      to{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+    /* CLOSE BUTTON */
+
+    .close-popup{
+      position:absolute;
+      top:16px;
+      left:16px;
+      width:42px;
+      height:42px;
+      border:none;
+      border-radius:14px;
+      background:#fff8dc;
+      border:2px solid rgba(250,204,21,0.18);
+      font-size:24px;
+      font-weight:800;
+      color:#6b7280;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    .close-popup:hover{
+      transform:scale(1.08);
+    }
+
+    .popup-title{
+      font-size:28px;
+      font-weight:800;
+      margin-bottom:20px;
+      text-align:center;
+      color:#d97706;
+    }
+
+    /* INPUT */
+
+    .input-wrapper{
+      position:relative;
+      margin-bottom:16px;
+    }
+
+    .input{
+      width:100%;
+      padding:16px;
+      padding-right:50px;
+      border:none;
+      outline:none;
+      border-radius:18px;
+      background:#fff8dc;
+      border:2px solid rgba(250,204,21,0.18);
+      font-size:15px;
+      font-weight:700;
+      color:#111827;
+    }
+
+    /* CLEAR BUTTON */
+
+    .clear-btn{
+      position:absolute;
+      right:14px;
+      top:50%;
+      transform:translateY(-50%);
+      border:none;
+      background:none;
+      font-size:24px;
+      cursor:pointer;
+      color:#6b7280;
+      font-weight:800;
+      display:none;
+    }
+
+    /* SELECT */
+
+    .select{
+      width:100%;
+      padding:16px;
+      border:none;
+      outline:none;
+      border-radius:18px;
+      background:#fff8dc;
+      border:2px solid rgba(250,204,21,0.18);
+      font-size:15px;
+      font-weight:700;
+      color:#111827;
+      margin-bottom:18px;
+      cursor:pointer;
+    }
+
+    /* CONTINUE */
+
+    .continue-btn{
+      width:100%;
+      border:none;
+      cursor:pointer;
+      background:linear-gradient(
+        135deg,
+        #fde047,
+        #facc15
+      );
+      color:#111827;
+      padding:16px;
+      border-radius:20px;
+      font-size:15px;
+      font-weight:800;
+      transition:0.25s;
+    }
+
+    .continue-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    footer{
+      margin-top:30px;
+      text-align:center;
+      color:#374151;
+      font-size:13px;
+      font-weight:700;
+    }
+
   </style>
 </head>
 <body>
 
-<div class="card">
-  <img src="https://i.imgur.com/RoCjVGU.jpeg">
-  <h3>Made Adi Suadnyana</h3>
-  <p>Klik untuk melihat nomor WhatsApp</p>
-  <button onclick="prank()">Lihat Nomor</button>
-</div>
+  <div class="container">
 
-<script>
-function prank() {
-  alert("😂 KENA PRANK!\nTenang bro, ini cuma bercanda 😎");
-}
-</script>
+    <!-- HEADER -->
+    <div class="header">
+
+      <img src="https://i.imgur.com/mOHyGe3.png" class="logo">
+
+      <div class="title">
+        <span class="yellow">Fezzly</span><span class="white">craft</span>
+      </div>
+
+      <div class="desc">
+        Tempat membeli rank dan item premium resmi Fezzlycraft.
+      </div>
+
+    </div>
+
+    <!-- RANKS -->
+    <div class="ranks">
+
+      <!-- ELITE -->
+      <div class="rank-card">
+
+        <div class="rank-name elite">
+          🥈 ELITE
+        </div>
+
+        <div class="price">
+          Rp20.000
+        </div>
+
+        <div class="features">
+          <div class="feature">✔ /feed</div>
+          <div class="feature">✔ /heal</div>
+          <div class="feature">✔ /repair</div>
+          <div class="feature">✔ /workbench</div>
+          <div class="feature">✔ /anvil</div>
+          <div class="feature">✔ Blocklimit 15.000 x 15.000</div>
+          <div class="feature">✔ Claimlimit 6x</div>
+          <div class="feature">✔ Sethome 5x</div>
+        </div>
+
+        <button class="buy-btn" onclick="openPopup('ELITE')">
+          🛒 BELI SEKARANG
+        </button>
+
+      </div>
+
+      <!-- EPIC -->
+      <div class="rank-card">
+
+        <div class="rank-name epic">
+          🥇 EPIC
+        </div>
+
+        <div class="price">
+          Rp40.000
+        </div>
+
+        <div class="features">
+          <div class="feature">✔ /feed</div>
+          <div class="feature">✔ /heal</div>
+          <div class="feature">✔ /repair</div>
+          <div class="feature">✔ /workbench</div>
+          <div class="feature">✔ /anvil</div>
+          <div class="feature">✔ /fly</div>
+          <div class="feature">✔ Blocklimit 30.000 x 30.000</div>
+          <div class="feature">✔ Claimlimit 9x</div>
+          <div class="feature">✔ Sethome 10x</div>
+        </div>
+
+        <button class="buy-btn" onclick="openPopup('EPIC')">
+          🛒 BELI SEKARANG
+        </button>
+
+      </div>
+
+      <!-- LEGEND -->
+      <div class="rank-card">
+
+        <div class="rank-name legend">
+          👑 LEGEND
+        </div>
+
+        <div class="price">
+          Rp80.000
+        </div>
+
+        <div class="features">
+          <div class="feature">✔ /feed</div>
+          <div class="feature">✔ /heal</div>
+          <div class="feature">✔ /repair</div>
+          <div class="feature">✔ /workbench</div>
+          <div class="feature">✔ /anvil</div>
+          <div class="feature">✔ /fly</div>
+          <div class="feature">✔ /tp</div>
+          <div class="feature">✔ /weather</div>
+          <div class="feature">✔ /time set</div>
+          <div class="feature">✔ Blocklimit 70.000 x 70.000</div>
+          <div class="feature">✔ Claimlimit 12x</div>
+          <div class="feature">✔ Sethome 15x</div>
+        </div>
+
+        <button class="buy-btn" onclick="openPopup('LEGEND')">
+          🛒 BELI SEKARANG
+        </button>
+
+      </div>
+
+      <!-- MYTHICAL -->
+      <div class="rank-card">
+
+        <div class="rank-name mythical">
+          🔥 MYTHICAL
+        </div>
+
+        <div class="price">
+          Rp100.000
+        </div>
+
+        <div class="features">
+          <div class="feature">✔ /feed</div>
+          <div class="feature">✔ /heal</div>
+          <div class="feature">✔ /repair</div>
+          <div class="feature">✔ /workbench</div>
+          <div class="feature">✔ /anvil</div>
+          <div class="feature">✔ /fly</div>
+          <div class="feature">✔ /tp</div>
+          <div class="feature">✔ /weather</div>
+          <div class="feature">✔ /time set</div>
+          <div class="feature">✔ /egod</div>
+          <div class="feature">✔ Blocklimit 100.000 x 100.000</div>
+          <div class="feature">✔ Claimlimit 15x</div>
+          <div class="feature">✔ Sethome 20x</div>
+        </div>
+
+        <button class="buy-btn" onclick="openPopup('MYTHICAL')">
+          🛒 BELI SEKARANG
+        </button>
+
+      </div>
+
+    </div>
+
+    <footer>
+      © 2026 Fezzlycraft Store
+    </footer>
+
+  </div>
+
+  <!-- POPUP -->
+  <div class="popup" id="popup">
+
+    <div class="popup-box">
+
+      <!-- CLOSE -->
+      <button
+        class="close-popup"
+        onclick="closePopup()"
+      >
+        ×
+      </button>
+
+      <div class="popup-title">
+        🛒 Pembelian Rank
+      </div>
+
+      <!-- INPUT -->
+      <div class="input-wrapper">
+
+        <input
+          type="text"
+          id="mcname"
+          class="input"
+          placeholder="Masukkan nama Minecraft"
+        >
+
+        <button
+          type="button"
+          class="clear-btn"
+          id="clearBtn"
+          onclick="clearInput()"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <!-- SELECT -->
+      <select id="edition" class="select">
+        <option value="">Pilih Edition</option>
+        <option value="Java">Java</option>
+        <option value="Bedrock">Bedrock</option>
+      </select>
+
+      <!-- BUTTON -->
+      <button class="continue-btn" onclick="continueBuy()">
+        ➜ LANJUT
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    let selectedRank = "";
+
+    const mcInput = document.getElementById("mcname");
+    const clearBtn = document.getElementById("clearBtn");
+    const edition = document.getElementById("edition");
+
+    // OPEN POPUP
+    function openPopup(rank){
+
+      selectedRank = rank;
+
+      document.getElementById("popup").style.display = "flex";
+
+    }
+
+    // CLOSE POPUP
+    function closePopup(){
+
+      document.getElementById("popup").style.display = "none";
+
+      mcInput.value = "";
+      edition.value = "";
+
+      clearBtn.style.display = "none";
+
+    }
+
+    // EDITION CHANGE
+    edition.addEventListener("change", function(){
+
+      mcInput.value = mcInput.value.replace(/^\./, "");
+
+      if(this.value === "Bedrock"){
+        mcInput.value = "." + mcInput.value;
+      }
+
+      toggleClearButton();
+
+    });
+
+    // INPUT EVENT
+    mcInput.addEventListener("input", function(){
+
+      if(edition.value === "Bedrock"){
+
+        if(!this.value.startsWith(".")){
+          this.value = "." + this.value.replace(/\./g, "");
+        }
+
+      }else{
+
+        this.value = this.value.replace(/\./g, "");
+
+      }
+
+      toggleClearButton();
+
+    });
+
+    // SHOW HIDE CLEAR BUTTON
+    function toggleClearButton(){
+
+      if(mcInput.value.length > 0){
+        clearBtn.style.display = "block";
+      }else{
+        clearBtn.style.display = "none";
+      }
+
+    }
+
+    // CLEAR INPUT
+    function clearInput(){
+
+      if(edition.value === "Bedrock"){
+        mcInput.value = ".";
+      }else{
+        mcInput.value = "";
+      }
+
+      mcInput.focus();
+
+      toggleClearButton();
+
+    }
+
+    // CONTINUE
+    function continueBuy(){
+
+      let mcname = mcInput.value;
+      let editionValue = edition.value;
+
+      if(mcname.trim() === "" || mcname === "."){
+        alert("Masukkan nama Minecraft!");
+        return;
+      }
+
+      if(editionValue === ""){
+        alert("Pilih edition terlebih dahulu!");
+        return;
+      }
+
+      // TANGGAL
+      const now = new Date();
+
+      const tanggal =
+        now.getDate() + "/" +
+        (now.getMonth()+1) + "/" +
+        now.getFullYear();
+
+      // WIB
+      const wib = now.toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Asia/Jakarta"
+      });
+
+      // WITA
+      const wita = now.toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Asia/Makassar"
+      });
+
+      // WIT
+      const wit = now.toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Asia/Jayapura"
+      });
+
+      // HARGA
+      let harga = "";
+
+      if(selectedRank === "ELITE"){
+        harga = "Rp. 20.000";
+      }
+
+      if(selectedRank === "EPIC"){
+        harga = "Rp. 40.000";
+      }
+
+      if(selectedRank === "LEGEND"){
+        harga = "Rp. 80.000";
+      }
+
+      if(selectedRank === "MYTHICAL"){
+        harga = "Rp. 100.000";
+      }
+
+      // FORMAT PESAN
+      let message =
+`----------BELI / UPGRADE RANK-----------
+Nama Minecraft: ${mcname}
+Minecraft Edition: ${editionValue}
+Tanggal: ${tanggal}
+Waktu:
+- ${wib} WIB
+- ${wita} WITA
+- ${wit} WIT
+Beli Rank: ${selectedRank}
+Harga: ${harga}
+--------------------------------------------------------`;
+
+      // REDIRECT WHATSAPP
+      window.location.href =
+        "https://wa.me/6285142065973?text=" +
+        encodeURIComponent(message);
+
+    }
+
+  </script>
 
 </body>
-</html>
+  </html>
